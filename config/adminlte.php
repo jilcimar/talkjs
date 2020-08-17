@@ -141,7 +141,7 @@ return [
         ],
         [
             'text' => 'Chat',
-            'url'  => 'admin/settings',
+            'url'  => 'chat',
             'icon' => 'fas fa-fw fa-comment',
         ],
     ],
@@ -239,7 +239,7 @@ return [
         ],
         [
             'name' => 'Pace',
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'css',
