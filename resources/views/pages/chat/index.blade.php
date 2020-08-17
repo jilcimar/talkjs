@@ -11,7 +11,7 @@
         <div class="col-md-4">
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Contatos</h3>
+                    <h3 class="box-title">Todos os Contatos</h3>
                     <div class="box-tools">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -38,15 +38,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-8">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Inbox</h3>
-                </div>
-                <div id="talkjs-container" style="width: 100%; height: 500px">
-                    <i>Selecione um contato</i>
-                </div>
-            </div>
-            <!-- /. box -->
+            <div id="talkjs-container" style="width: 100%; height: 500px;"></div>
         </div>
         <!-- /.col -->
     </div>
@@ -73,7 +65,7 @@
                 conversation.setParticipant(other);
 
                 var inbox = talkSession.createInbox({selected: conversation});
-                inbox.mount(document.getElementById("talkjs-container"));
+                inbox.mount($("#talkjs-container"));
             });
         }
 

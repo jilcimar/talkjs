@@ -40,7 +40,7 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
 
-            User::create($request->all());
+            User::create(array_merge($request->all(), ['password' =>bcrypt($request->password)]));
 
             DB::commit();
 
