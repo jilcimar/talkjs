@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Repositories\UserRepository;
+
 class ChatController extends Controller
 {
     /**
@@ -11,15 +13,8 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAuthUser($id)
+    public function getDataUser(UserRepository $model,$id)
     {
-        $user = User::find($id);
-
-        return response()->json([
-            "id" => (string) $user->id,
-            "name" => $user->name,
-            "email" => $user->email,
-            "photoUrl" => "https://i.ibb.co/cYDxzms/photo.png",
-        ]);
+        return response()->json($model->userData($id));
     }
 }

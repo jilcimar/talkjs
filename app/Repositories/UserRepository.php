@@ -23,4 +23,15 @@ class  UserRepository extends AbstractRepository
         $user = $this->model->find($id);
         return $user->update(array_merge($data->all(), ['password' =>bcrypt($data->password)]));
     }
+
+    public function userData ($id)
+    {
+        $user = $this->model->find($id);
+        return [
+            "id" => (string) $user->id,
+            "name" => $user->name,
+            "email" => $user->email,
+            "photoUrl" => "https://i.ibb.co/cYDxzms/photo.png",
+        ];
+    }
 }
