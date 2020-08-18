@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Talk JS',
+    'title' => 'Bee Talk JS',
 
     'title_prefix' => '',
 
