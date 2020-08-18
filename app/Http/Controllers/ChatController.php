@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -12,10 +13,9 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserRepository $model)
     {
-        $users = User::whereNotIn('id', [auth()->user()->id])->orderBy('name','asc')->get();
-
+        $users = $model->allNotLoggedIn();
         return view('pages.chat.index', compact('users'));
     }
 }
