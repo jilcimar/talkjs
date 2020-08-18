@@ -15,7 +15,7 @@ class  AbstractRepository
 
     public function all ()
     {
-        return $this->model->all();
+        return $this->model->orderBy('name','asc')->get();
     }
 
     public function destroy($id)
