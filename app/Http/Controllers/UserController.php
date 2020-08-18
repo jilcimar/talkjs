@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -37,35 +38,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, UserRepository $model)
     {
-        DB::beginTransaction();
-        try {
-
-            User::create(array_merge($request->all(), ['password' =>bcrypt($request->password)]));
-
-            DB::commit();
-
-            return redirect()->route('home')->with('success', 'Contato adicionado!');
-        } catch (\Exception $exception) {
-            DB::rollBack();
-
-            return redirect()->back()->withErrors([
-                'Erro ao salvar usuario',
-                $exception->getMessage(),
-            ]);
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $model->store($request);
+        return redirect('users')->with('success', 'Contato adicionado!');
     }
 
     /**
@@ -74,9 +50,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('pages.users.edit', compact('user'));
     }
 
     /**
@@ -86,9 +62,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id, UserRepository $model)
     {
-        //
+        $model->update($request, $id);
+        return redirect('users')->with('success', 'Contato atualizado!');
     }
 
     /**
@@ -97,8 +74,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserRepository $model ,$id)
     {
-        dd('oi');
+        $model->destroy($id);
+        return redirect()->back()->with('success', 'Contato apagado!');
     }
 }

@@ -10,7 +10,17 @@ class  UserRepository extends AbstractRepository
 
     public function allNotLoggedIn ()
     {
-        $model = app(User::class);
-        return $model->whereNotIn('id', [auth()->user()->id])->orderBy('name','asc')->get();
+        return $this->model->whereNotIn('id', [auth()->user()->id])->orderBy('name','asc')->get();
+    }
+
+    public function store($data)
+    {
+        return $this->model->create(array_merge($data->all(), ['password' =>bcrypt($data->password)]));
+    }
+
+    public function update($data, $id)
+    {
+        $user = $this->model->find($id);
+        return $user->update(array_merge($data->all(), ['password' =>bcrypt($data->password)]));
     }
 }

@@ -140,6 +140,11 @@ return [
             'icon' => 'fas fa-fw fa-user-plus',
         ],
         [
+            'text' => 'Lista de contatos',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-list-ul',
+        ],
+        [
             'text' => 'Chat',
             'url'  => 'chat',
             'icon' => 'fas fa-fw fa-comment',

@@ -38,16 +38,18 @@
                                                        href="{{route('users.edit', $user->id)}}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a class="btn btn-danger destroy-user" title="Apagar"
-                                                       href="#" data-user-id="{{$user->id}}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                    <form action="{{route('users.destroy', $user->id)}}"
-                                                          method="POST"
-                                                          id="form-destroy-{{$user->id}}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
+                                                    @if(\auth()->user()->id != $user->id)
+                                                        <a class="btn btn-danger destroy-user" title="Apagar"
+                                                           href="#" data-user-id="{{$user->id}}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                        <form action="{{route('users.destroy', $user->id)}}"
+                                                              method="POST"
+                                                              id="form-destroy-{{$user->id}}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
@@ -72,7 +74,7 @@
 @stop
 @section('js')
     <script>
-        $('.destroy-user').click(function (ev) {
+        $('.destroy-user').click(function () {
             let userId = $(this).data('userId');
             Swal.fire({
                 title: 'Apagar Contato',

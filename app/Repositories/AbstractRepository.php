@@ -18,6 +18,11 @@ class  AbstractRepository
         return $this->model->all();
     }
 
+    public function destroy($id)
+    {
+        return $this->model->destroy($id);
+    }
+
     protected function resolveModel()
     {
         return app($this->model);
