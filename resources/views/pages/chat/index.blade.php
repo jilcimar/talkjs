@@ -72,7 +72,6 @@
         $('.item-user').click(function (){
             var userId = $(this).data("user");
             chatStart(userId);
-            $('.tj_panel').hide();
         });
     </script>
 @endsection
